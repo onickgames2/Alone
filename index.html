@@ -396,7 +396,7 @@
             </div>
         </section>
 
-        <!-- SEÇÃO DO JOGO (NOVA ABA DINÂMICA) -->
+        <!-- SEÇÃO DO JOGO (ABA DINÂMICA) -->
         <section id="section-game" class="w-full hidden flex flex-col items-center">
             <div class="text-center mb-6">
                 <h1 class="text-xs font-retro tracking-[0.3em] text-cyan-400 uppercase mb-3 animate-pulse">
@@ -469,13 +469,16 @@
                 </div>
             </div>
 
-            <!-- Mini Listagem Estética -->
+            <!-- Listagem Dinâmica Estética de Todas as Músicas -->
             <div class="grid grid-cols-1 md:grid-cols-2 gap-1.5 mt-3 pt-2 border-t border-white/5 text-[9px]">
                 <button onclick="selectTrack(0)" id="track-0" class="text-left py-1 px-2 rounded hover:bg-white/5 truncate text-gray-400">1. Azure Ambient</button>
                 <button onclick="selectTrack(1)" id="track-1" class="text-left py-1 px-2 rounded hover:bg-white/5 truncate text-gray-400">2. Space Odyssey</button>
                 <button onclick="selectTrack(2)" id="track-2" class="text-left py-1 px-2 rounded hover:bg-white/5 truncate text-gray-400">3. Retro Void</button>
                 <button onclick="selectTrack(3)" id="track-3" class="text-left py-1 px-2 rounded hover:bg-white/5 truncate text-cyan-400 font-semibold">4. Clímax Final (Recomendado)</button>
                 <button onclick="selectTrack(4)" id="track-4" class="text-left py-1 px-2 rounded hover:bg-white/5 truncate text-gray-400">5. Nebula Beats</button>
+                <button onclick="selectTrack(5)" id="track-5" class="text-left py-1 px-2 rounded hover:bg-white/5 truncate text-gray-400">6. Cosmic Dawn</button>
+                <button onclick="selectTrack(6)" id="track-6" class="text-left py-1 px-2 rounded hover:bg-white/5 truncate text-gray-400">7. Starlight Horizon</button>
+                <button onclick="selectTrack(7)" id="track-7" class="text-left py-1 px-2 rounded hover:bg-white/5 truncate text-gray-400">8. Void Pulse</button>
             </div>
         </section>
 
@@ -500,31 +503,32 @@
     </div>
 
     <script>
-        // Configurações e Músicas Fornecidas
+        // Configurações e Músicas Fornecidas (Atualizada com as 3 novas faixas)
         const tracks = [
             { name: "1. Azure Ambient", url: "https://files.catbox.moe/qi3fat.m4a" },
             { name: "2. Space Odyssey", url: "https://files.catbox.moe/pag061.mp3" },
             { name: "3. Retro Void", url: "https://files.catbox.moe/lwf9ns.mp3" },
             { name: "4. Clímax Final (Recomendado)", url: "https://files.catbox.moe/al68kf.mp3" },
-            { name: "5. Nebula Beats", url: "https://files.catbox.moe/9f3e8f.mp3" }
+            { name: "5. Nebula Beats", url: "https://files.catbox.moe/9f3e8f.mp3" },
+            { name: "6. Cosmic Dawn", url: "https://files.catbox.moe/9rpy6d.mp3" },
+            { name: "7. Starlight Horizon", url: "https://files.catbox.moe/q4kydq.mp3" },
+            { name: "8. Void Pulse", url: "https://files.catbox.moe/o2ld71.mp3" }
         ];
 
         let currentTrackIndex = 0;
         let isMuted = false;
         let timerInterval = null;
-        let isClimaxTrackTriggered = false; // Flag para controlar se a música de clímax já foi acionada
-        let hasReachedZeroTriggered = false; // Flag para garantir que a animação final ocorra só uma vez por ciclo
+        let isClimaxTrackTriggered = false; // Controla se a música de clímax já foi acionada
+        let hasReachedZeroTriggered = false; // Garante que a animação final ocorra só uma vez por ciclo
 
-        // Inicializa o alvo do timer com exatamente 5 MINUTOS restantes por padrão
-        let targetDate = new Date();
-        targetDate.setMinutes(targetDate.getMinutes() + 5);
+        // DATA ALVO CONFIRMADA: 3 de Julho de 2026 às 19:30 (Horário local)
+        const targetDate = new Date('2026-07-03T19:30:00');
 
         const audioPlayer = document.getElementById('audioPlayer');
 
         // ==========================================
         //  GERENCIADOR DE TRILHAS SONORAS (PLAYLIST)
         // ==========================================
-        // Inicializa o player e configura o pré-carregamento agressivo de metadados de todas as faixas
         function initMusic() {
             audioPlayer.src = tracks[currentTrackIndex].url;
             audioPlayer.load(); // Carrega antecipadamente a primeira música
@@ -534,11 +538,11 @@
             // Configurar avanço automático para a próxima música ao finalizar a atual
             audioPlayer.addEventListener('ended', handleTrackEnded);
 
-            // Pré-carregamento das outras faixas em segundo plano
+            // Pré-carregamento de todas as faixas em segundo plano
             preloadAllTracks();
         }
 
-        // Função de pré-carregamento auxiliar em segundo plano (usa cache nativo do navegador)
+        // Pré-carregamento auxiliar em segundo plano (cache nativo do navegador)
         function preloadAllTracks() {
             tracks.forEach(track => {
                 const audioLink = document.createElement('link');
@@ -549,14 +553,14 @@
             });
         }
 
-        // Função que lida com o encerramento automático da faixa
+        // Avanço automático das músicas
         function handleTrackEnded() {
             let nextIndex = (currentTrackIndex + 1) % tracks.length;
             
             // Regra: Não toca a de "clímax final" (index 3) de forma automática.
             // Pula ela se a contagem ainda não estiver abaixo de 60 segundos
             if (nextIndex === 3 && !isClimaxTrackTriggered) {
-                nextIndex = (nextIndex + 1) % tracks.length; // Avança para a 5ª música (Nebula Beats)
+                nextIndex = (nextIndex + 1) % tracks.length; // Avança para Nebula Beats
             }
             
             selectTrack(nextIndex);
@@ -577,7 +581,6 @@
             }
         }
 
-        // Seleção de música manual ou automática
         function selectTrack(index) {
             currentTrackIndex = index;
             audioPlayer.src = tracks[currentTrackIndex].url;
@@ -654,7 +657,6 @@
             const tabBtnGame = document.getElementById('tabBtn-game');
 
             if (tabId === 'timer') {
-                // Ativar Aba do Timer
                 timerSection.classList.remove('hidden');
                 gameSection.classList.add('hidden');
                 
@@ -664,7 +666,6 @@
                 tabBtnGame.classList.add('text-gray-400');
                 tabBtnGame.classList.remove('text-cyan-400', 'border-b-2', 'border-cyan-400', 'pb-1.5', 'md:pb-3');
             } else if (tabId === 'game') {
-                // Ativar Aba do Jogo
                 gameSection.classList.remove('hidden');
                 timerSection.classList.add('hidden');
 
