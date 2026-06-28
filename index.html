@@ -1,12 +1,12 @@
 <!DOCTYPE html>
-<html lang="pt-PT">
+<html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>The Azure - Countdown & Update</title>
-    <!-- Tailwind CSS para estruturação rápida -->
+    <!-- Tailwind CSS para estruturação ágil -->
     <script src="https://cdn.tailwindcss.com"></script>
-    <!-- Google Fonts: Orbitron, Montserrat e Press Start 2P para o clima retro/cinematográfico -->
+    <!-- Google Fonts: Orbitron, Montserrat e Press Start 2P para o clima retrô/cinematográfico -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;800&family=Orbitron:wght@400;700;900&family=Press+Start+2P&display=swap" rel="stylesheet">
@@ -35,22 +35,6 @@
             font-family: 'Press Start 2P', monospace;
         }
 
-        /* Imagem de Fundo do Jogo no Background do Ecrã Inteiro */
-        .game-background-overlay {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-image: url('https://files.catbox.moe/giushq.png');
-            background-size: cover;
-            background-position: center;
-            opacity: 0.18; /* Opacidade suave para não atrapalhar a leitura */
-            filter: blur(4px); /* Desfocagem cinematográfica */
-            pointer-events: none;
-            z-index: 1;
-        }
-
         /* Efeito de Vinheta Cinematográfica Profunda e Manchas nos Cantos */
         .cinematic-vignette {
             position: fixed;
@@ -61,15 +45,15 @@
             pointer-events: none;
             z-index: 5;
             background: 
-                radial-gradient(circle at 0% 0%, rgba(122, 0, 255, 0.25) 0%, transparent 45%),
-                radial-gradient(circle at 100% 0%, rgba(0, 210, 255, 0.25) 0%, transparent 45%),
-                radial-gradient(circle at 100% 100%, rgba(122, 0, 255, 0.28) 0%, transparent 50%),
-                radial-gradient(circle at 0% 100%, rgba(0, 210, 255, 0.28) 0%, transparent 50%),
+                radial-gradient(circle at 0% 0%, rgba(122, 0, 255, 0.22) 0%, transparent 45%),
+                radial-gradient(circle at 100% 0%, rgba(0, 210, 255, 0.22) 0%, transparent 45%),
+                radial-gradient(circle at 100% 100%, rgba(122, 0, 255, 0.25) 0%, transparent 50%),
+                radial-gradient(circle at 0% 100%, rgba(0, 210, 255, 0.25) 0%, transparent 50%),
                 radial-gradient(circle at 50% 50%, transparent 20%, rgba(0, 0, 0, 0.95) 100%);
         }
 
-        /* Manchas Roxas puxadas para o Azul nos Cantos ao zerar o Timer */
-        .timer-zero-stains {
+        /* Manchas roxas com azul nos cantos quando o timer zera */
+        .zero-hour-stains {
             position: fixed;
             top: 0;
             left: 0;
@@ -78,19 +62,19 @@
             pointer-events: none;
             z-index: 6;
             opacity: 0;
-            transition: opacity 1.8s ease-in-out;
+            transition: opacity 2s cubic-bezier(0.16, 1, 0.3, 1);
             background: 
-                radial-gradient(circle at 0% 0%, rgba(122, 0, 255, 0.6) 0%, rgba(0, 210, 255, 0.3) 35%, transparent 70%),
-                radial-gradient(circle at 100% 0%, rgba(122, 0, 255, 0.6) 0%, rgba(0, 210, 255, 0.3) 35%, transparent 70%),
-                radial-gradient(circle at 100% 100%, rgba(122, 0, 255, 0.6) 0%, rgba(0, 210, 255, 0.3) 35%, transparent 70%),
-                radial-gradient(circle at 0% 100%, rgba(122, 0, 255, 0.6) 0%, rgba(0, 210, 255, 0.3) 35%, transparent 70%);
+                radial-gradient(circle at 0% 0%, rgba(122, 0, 255, 0.8) 0%, rgba(0, 210, 255, 0.5) 35%, transparent 70%),
+                radial-gradient(circle at 100% 0%, rgba(122, 0, 255, 0.8) 0%, rgba(0, 210, 255, 0.5) 35%, transparent 70%),
+                radial-gradient(circle at 100% 100%, rgba(122, 0, 255, 0.8) 0%, rgba(0, 210, 255, 0.5) 35%, transparent 70%),
+                radial-gradient(circle at 0% 100%, rgba(122, 0, 255, 0.8) 0%, rgba(0, 210, 255, 0.5) 35%, transparent 70%);
         }
 
-        .timer-zero-stains.active {
+        .zero-hour-stains.active {
             opacity: 1;
         }
 
-        /* Manchas de fumo cósmico em movimento lento */
+        /* Manchas de fumaça cósmica em movimento lento */
         .cosmic-dust-1 {
             position: absolute;
             width: 700px;
@@ -100,7 +84,6 @@
             left: -10%;
             filter: blur(120px);
             pointer-events: none;
-            z-index: 2;
             animation: floatNebula 25s ease-in-out infinite alternate;
         }
 
@@ -113,7 +96,6 @@
             right: -15%;
             filter: blur(140px);
             pointer-events: none;
-            z-index: 2;
             animation: floatNebula 30s ease-in-out infinite alternate-reverse;
         }
 
@@ -145,11 +127,11 @@
 
         @media (max-width: 1024px) {
             .floral-border-left, .floral-border-right {
-                display: none; /* Oculta em ecrãs pequenos para não obstruir o conteúdo */
+                display: none; /* Oculta em telas pequenas para não obstruir o conteúdo */
             }
         }
 
-        /* Brilhos de Neon personalizados */
+        /* Brilhos de Neon customizados */
         .neon-glow-azure {
             filter: drop-shadow(0 0 8px rgba(0, 210, 255, 0.6));
         }
@@ -168,9 +150,9 @@
 
         /* Painel Glassmorphism */
         .glass-panel {
-            background: rgba(3, 1, 10, 0.88);
-            backdrop-filter: blur(20px);
-            -webkit-backdrop-filter: blur(20px);
+            background: rgba(3, 1, 10, 0.85);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
             border: 1px solid rgba(255, 255, 255, 0.05);
         }
 
@@ -201,7 +183,7 @@
             box-shadow: 0 10px 30px rgba(0, 210, 255, 0.6), 0 0 15px rgba(122, 0, 255, 0.6);
         }
 
-        /* Animação de pulso subtil */
+        /* Animação de pulso sutil */
         @keyframes subtlePulse {
             0%, 100% { opacity: 0.8; transform: scale(1); }
             50% { opacity: 1; transform: scale(1.03); }
@@ -211,53 +193,53 @@
             animation: subtlePulse 3s infinite ease-in-out;
         }
 
-        /* Efeito Fade-out para transição de Timer -> Sucesso */
-        .fade-out-active {
-            opacity: 0;
-            transform: scale(0.95);
-            pointer-events: none;
-            transition: opacity 0.8s ease-in-out, transform 0.8s ease-in-out;
+        /* ANIMAÇÃO DE FADE OUT DO TIMER */
+        .timer-fade-out {
+            animation: cinematicFadeOut 1s forwards cubic-bezier(0.25, 1, 0.5, 1);
         }
 
-        /* Animação de Salto da Update (Estilo Pop Spring) */
-        @keyframes jumpIn {
-            0% {
-                opacity: 0;
-                transform: scale(0.3) translateY(100px);
-            }
-            50% {
-                opacity: 0.8;
-                transform: scale(1.1) translateY(-15px);
-            }
-            75% {
-                transform: scale(0.95) translateY(5px);
-            }
-            100% {
-                opacity: 1;
-                transform: scale(1) translateY(0);
-            }
+        @keyframes cinematicFadeOut {
+            0% { opacity: 1; transform: scale(1); filter: blur(0); }
+            100% { opacity: 0; transform: scale(0.92); filter: blur(10px); visibility: hidden; }
         }
 
-        .animate-jump {
-            animation: jumpIn 0.9s cubic-bezier(0.175, 0.885, 0.32, 1.275) both;
+        /* ANIMAÇÃO DE SALTO / BOUNCE DO ESTADO FINALIZADO */
+        .update-bounce-jump {
+            animation: updateBounceJumpEffect 1.3s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+        }
+
+        @keyframes updateBounceJumpEffect {
+            0% { transform: scale(0.4) translateY(120px); opacity: 0; filter: brightness(2); }
+            50% { transform: scale(1.1) translateY(-20px); opacity: 0.8; }
+            75% { transform: scale(0.95) translateY(5px); }
+            100% { transform: scale(1) translateY(0); opacity: 1; filter: brightness(1); }
         }
     </style>
 </head>
 <body class="relative min-h-screen flex flex-col justify-between items-center text-white pb-6">
 
-    <!-- Fundo de Imagem do Jogo com Opacidade e Desfocagem -->
-    <div class="game-background-overlay"></div>
-
     <!-- Efeitos de Fundo Cósmico -->
     <div class="cosmic-dust-1"></div>
     <div class="cosmic-dust-2"></div>
     <div class="cinematic-vignette"></div>
-    <div id="cornerStains" class="timer-zero-stains"></div>
+    <!-- Manchas roxas com azul adicionadas dinamicamente no término -->
+    <div id="cornerStains" class="zero-hour-stains"></div>
 
     <!-- Canvas para Partículas Celestiais -->
-    <canvas id="particleCanvas" class="fixed top-0 left-0 w-full h-full pointer-events-none z-0 opacity-25"></canvas>
+    <canvas id="particleCanvas" class="fixed top-0 left-0 w-full h-full pointer-events-none z-0 opacity-30"></canvas>
 
-    <!-- MOLDURAS FLORAIS ESTILO DELTARUNE (Desenhos SVG personalizados em Azul e Roxo) -->
+    <!-- MENU DE CABEÇALHO RETRÔ (Sticky/Preso no Topo com visual translúcido) -->
+    <header class="sticky top-0 left-0 w-full z-40 bg-black/85 backdrop-blur-md border-b border-white/10 py-3 md:py-4 px-4 flex flex-col items-center">
+        <nav class="flex items-center justify-center space-x-6 md:space-x-12 w-full max-w-4xl text-[10px] md:text-xs font-retro tracking-widest text-gray-400">
+            <button onclick="switchTab('game')" id="tabBtn-game" class="hover:text-cyan-400 transition-colors uppercase py-1">JOGO</button>
+            <button onclick="switchTab('timer')" id="tabBtn-timer" class="text-cyan-400 border-b-2 border-cyan-400 pb-1.5 md:pb-3 uppercase py-1">TIMER</button>
+            <!-- Logo Central Estética -->
+            <img src="https://files.catbox.moe/x4wdsf.png" alt="Logo" class="h-10 md:h-14 object-contain mx-2 hover:scale-110 transition duration-300">
+            <a href="#playlist-section" class="hover:text-purple-400 transition-colors">PLAYLIST</a>
+        </nav>
+    </header>
+
+    <!-- MOLDURAS FLORAIS ESTILO DELTARUNE (Desenhos SVG customizados em Azul e Roxo) -->
     <!-- Moldura Esquerda -->
     <svg class="floral-border-left neon-glow-azure" viewBox="0 0 100 500" fill="none" xmlns="http://www.w3.org/2000/svg">
         <path d="M10 10 C 30 100, -10 200, 20 300 C 40 400, 10 450, 30 490" stroke="#00d2ff" stroke-width="3" stroke-linecap="round"/>
@@ -300,151 +282,176 @@
         <path d="M78 315 Q 55 310 65 330 Q 78 320 78 315 Z" fill="#3c0080"/>
     </svg>
 
-    <!-- MENU DE CABEÇALHO RETRO -->
-    <header class="w-full max-w-4xl px-4 pt-6 z-20 flex flex-col items-center">
-        <nav class="flex items-center justify-center space-x-6 md:space-x-12 border-b border-white/10 pb-4 w-full mb-6 text-[10px] md:text-xs font-retro tracking-widest text-gray-400">
-            <a href="#" class="hover:text-cyan-400 transition-colors">JOGO</a>
-            <a href="#" class="text-cyan-400 border-b-2 border-cyan-400 pb-4">TIMER</a>
-            <!-- Logótipo Central Estético -->
-            <img src="https://files.catbox.moe/x4wdsf.png" alt="Logótipo" class="h-10 md:h-14 object-contain mx-2 hover:scale-110 transition duration-300">
-            <a href="#playlist-section" class="hover:text-purple-400 transition-colors">PLAYLIST</a>
-            <button onclick="toggleSettings()" class="hover:text-cyan-400 transition-all flex items-center space-x-1">
-                <i class="fa-solid fa-gears text-[10px]"></i>
-                <span class="hidden md:inline">TESTAR</span>
-            </button>
-        </nav>
-    </header>
-
     <!-- CONTEÚDO PRINCIPAL (MÓDULO CENTRAL DO EVENTO) -->
-    <main class="w-full max-w-3xl px-4 z-20 flex-grow flex flex-col justify-center items-center">
+    <main class="w-full max-w-3xl px-4 z-20 flex-grow flex flex-col justify-center items-center py-8">
         
-        <!-- Bloco Principal de Apresentação da Update -->
-        <div class="text-center mb-8">
-            <h1 class="text-xs font-retro tracking-[0.3em] text-purple-400 uppercase mb-4 animate-pulse">
-                // AZURE SYSTEM ONLINE //
-            </h1>
-            <h2 class="text-3xl md:text-5xl font-extrabold tracking-wider font-orbitron text-transparent bg-clip-text bg-gradient-to-r from-white via-cyan-200 to-purple-400 uppercase">
-                The Azure Update
-            </h2>
-        </div>
+        <!-- SEÇÃO DO TIMER (CONTEÚDO PRINCIPAL INICIAL) -->
+        <section id="section-timer" class="w-full flex flex-col items-center">
+            <!-- Bloco Principal de Apresentação da Update -->
+            <div class="text-center mb-8">
+                <h1 class="text-xs font-retro tracking-[0.3em] text-purple-400 uppercase mb-4 animate-pulse">
+                    // AZURE SYSTEM ONLINE //
+                </h1>
+                <h2 class="text-3xl md:text-5xl font-extrabold tracking-wider font-orbitron text-transparent bg-clip-text bg-gradient-to-r from-white via-cyan-200 to-purple-400 uppercase">
+                    The Azure Update
+                </h2>
+            </div>
 
-        <!-- CARD DO TIMER (Estilo consola do vídeo) -->
-        <div id="mainDisplayCard" class="w-full glass-panel rounded-2xl overflow-hidden shadow-2xl transition-all duration-700 glow-purple relative flex flex-col justify-center items-center p-6 md:p-10 min-h-[380px]">
-            
-            <!-- Imagem de Fundo Interna do Card -->
-            <div class="absolute inset-0 z-0 bg-cover bg-center opacity-25 filter blur-[1px]" style="background-image: url('https://files.catbox.moe/giushq.png');"></div>
-            <div class="absolute inset-0 bg-gradient-to-t from-black via-black/85 to-transparent z-0"></div>
-
-            <div id="cardContent" class="w-full z-10 flex flex-col items-center justify-center text-center">
+            <!-- CARD DO TIMER (Estilo console do vídeo) -->
+            <div id="mainDisplayCard" class="w-full glass-panel rounded-2xl overflow-hidden shadow-2xl transition-all duration-700 glow-purple relative flex flex-col justify-center items-center p-6 md:p-10 min-h-[380px]">
                 
-                <!-- ESTADO 1: TIMER REGRESSIVO ATIVO -->
-                <div id="stateCountdown" class="w-full transition-all duration-500">
-                    <span class="text-[9px] md:text-[11px] font-retro tracking-widest text-cyan-400 mb-6 block uppercase">
-                        Sinal de libertação detetado em:
-                    </span>
+                <!-- Imagem de Fundo opaca e cinematográfica -->
+                <div class="absolute inset-0 z-0 bg-cover bg-center opacity-20 filter blur-[1px]" style="background-image: url('https://files.catbox.moe/giushq.png');"></div>
+                <div class="absolute inset-0 bg-gradient-to-t from-black via-black/80 to-transparent z-0"></div>
+
+                <div id="cardContent" class="w-full z-10 flex flex-col items-center justify-center text-center">
                     
-                    <!-- Display do Timer com design clean e neon -->
-                    <div class="grid grid-cols-2 md:grid-cols-4 gap-4 max-w-xl mx-auto mb-8 font-orbitron">
-                        <!-- Dias -->
-                        <div class="bg-black/60 border border-cyan-500/20 px-3 py-5 rounded-lg flex flex-col items-center">
-                            <span id="days" class="text-3xl md:text-5xl font-bold text-white glow-text-azure">00</span>
-                            <span class="text-[9px] tracking-widest text-cyan-400 font-semibold uppercase mt-1">Dias</span>
-                        </div>
-                        <!-- Horas -->
-                        <div class="bg-black/60 border border-purple-500/20 px-3 py-5 rounded-lg flex flex-col items-center">
-                            <span id="hours" class="text-3xl md:text-5xl font-bold text-white glow-text-purple">00</span>
-                            <span class="text-[9px] tracking-widest text-purple-400 font-semibold uppercase mt-1">Horas</span>
-                        </div>
-                        <!-- Minutos -->
-                        <div class="bg-black/60 border border-cyan-500/20 px-3 py-5 rounded-lg flex flex-col items-center">
-                            <span id="minutes" class="text-3xl md:text-5xl font-bold text-white glow-text-azure">00</span>
-                            <span class="text-[9px] tracking-widest text-cyan-400 font-semibold uppercase mt-1">Minutos</span>
-                        </div>
-                        <!-- Segundos -->
-                        <div class="bg-black/60 border border-purple-500/20 px-3 py-5 rounded-lg flex flex-col items-center">
-                            <span id="seconds" class="text-3xl md:text-5xl font-bold text-white glow-text-purple">00</span>
-                            <span class="text-[9px] tracking-widest text-purple-400 font-semibold uppercase mt-1">Segundos</span>
-                        </div>
-                    </div>
-
-                    <p class="text-xs text-gray-400 tracking-widest font-mono">
-                        DATA DE CHEGADA: <span id="targetDateDisplay" class="text-cyan-300 font-bold">---</span>
-                    </p>
-                </div>
-
-                <!-- ESTADO 2: EM BREVE (ANOS 2028 ATÉ 2100) -->
-                <div id="stateComingSoon" class="w-full hidden transition-all duration-500 py-6">
-                    <div class="relative inline-block mb-4">
-                        <span class="absolute inset-0 rounded-full bg-purple-600/20 filter blur-xl animate-ping"></span>
-                        <div class="relative w-16 h-16 rounded-full bg-black/60 border border-purple-500/40 flex items-center justify-center text-purple-400 text-2xl shadow-[0_0_20px_rgba(122,0,255,0.3)]">
-                            <i class="fa-solid fa-hourglass-half animate-spin-slow"></i>
-                        </div>
-                    </div>
-                    <span class="text-[10px] font-retro tracking-[0.2em] text-purple-400 block mb-3 uppercase">ESTADO DE ESPERA ATIVADO</span>
-                    <h2 class="text-4xl md:text-6xl font-extrabold font-orbitron tracking-widest mb-4 glow-text-purple text-transparent bg-clip-text bg-gradient-to-r from-purple-400 via-pink-400 to-cyan-400">
-                        EM BREVE
-                    </h2>
-                    <p class="text-xs md:text-sm text-gray-300 max-w-md mx-auto leading-relaxed mb-6">
-                        Transmissão programada para o setor temporal de <span id="comingSoonYear" class="text-cyan-400 font-bold">2099</span>. Aguarde novas coordenadas.
-                    </p>
-                </div>
-
-                <!-- ESTADO 3: FINALIZADO (JOGUE AGORA / THE AZURE HAS BEEN ARRIVED) -->
-                <div id="stateFinished" class="w-full hidden py-2 flex flex-col items-center">
-                    
-                    <!-- Banner Retro Horizontal 16:9 do Ícone do Roblox -->
-                    <div class="relative w-full max-w-md aspect-[16/9] rounded-xl overflow-hidden glow-azure border border-cyan-500/40 shadow-2xl mb-6 group transform hover:scale-[1.01] transition duration-500">
-                        <!-- Imagem do ícone do Roblox fornecida -->
-                        <img src="https://files.catbox.moe/ix81a4.jpeg" alt="Ícone Roblox" class="w-full h-full object-cover">
-                        <div class="absolute inset-0 bg-gradient-to-t from-black via-black/30 to-transparent"></div>
-                        <span class="absolute top-3 left-3 bg-red-600 text-white font-retro text-[8px] px-2.5 py-1 rounded uppercase tracking-widest shadow-lg">
-                            DISPONÍVEL AGORA
+                    <!-- ESTADO 1: TIMER REGRESSIVO ATIVO -->
+                    <div id="stateCountdown" class="w-full transition-all duration-500">
+                        <span class="text-[9px] md:text-[11px] font-retro tracking-widest text-cyan-400 mb-6 block uppercase">
+                            Sinal de liberação detectado em:
                         </span>
+                        
+                        <!-- Display do Timer com design clean e neon -->
+                        <div class="grid grid-cols-2 md:grid-cols-4 gap-4 max-w-xl mx-auto mb-8 font-orbitron">
+                            <!-- Dias -->
+                            <div class="bg-black/60 border border-cyan-500/20 px-3 py-5 rounded-lg flex flex-col items-center">
+                                <span id="days" class="text-3xl md:text-5xl font-bold text-white glow-text-azure">00</span>
+                                <span class="text-[9px] tracking-widest text-cyan-400 font-semibold uppercase mt-1">Dias</span>
+                            </div>
+                            <!-- Horas -->
+                            <div class="bg-black/60 border border-purple-500/20 px-3 py-5 rounded-lg flex flex-col items-center">
+                                <span id="hours" class="text-3xl md:text-5xl font-bold text-white glow-text-purple">00</span>
+                                <span class="text-[9px] tracking-widest text-purple-400 font-semibold uppercase mt-1">Horas</span>
+                            </div>
+                            <!-- Minutos -->
+                            <div class="bg-black/60 border border-cyan-500/20 px-3 py-5 rounded-lg flex flex-col items-center">
+                                <span id="minutes" class="text-3xl md:text-5xl font-bold text-white glow-text-azure">00</span>
+                                <span class="text-[9px] tracking-widest text-cyan-400 font-semibold uppercase mt-1">Minutos</span>
+                            </div>
+                            <!-- Segundos -->
+                            <div class="bg-black/60 border border-purple-500/20 px-3 py-5 rounded-lg flex flex-col items-center">
+                                <span id="seconds" class="text-3xl md:text-5xl font-bold text-white glow-text-purple">00</span>
+                                <span class="text-[9px] tracking-widest text-purple-400 font-semibold uppercase mt-1">Segundos</span>
+                            </div>
+                        </div>
+
+                        <p class="text-xs text-gray-400 tracking-widest font-mono">
+                            DATA DE CHEGADA: <span id="targetDateDisplay" class="text-cyan-300 font-bold">---</span>
+                        </p>
                     </div>
 
-                    <span class="text-[9px] md:text-[10px] font-retro tracking-widest text-cyan-400 mb-3 block animate-bounce uppercase">
-                        ATUALIZAÇÃO CONCLUÍDA
-                    </span>
-                    
-                    <h2 class="text-2xl md:text-4xl font-black font-orbitron text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 via-white to-purple-400 glow-text-azure mb-3 uppercase">
-                        The Azure Has Been Arrived
-                    </h2>
-                    
-                    <p class="text-xs md:text-sm text-gray-300 tracking-wider max-w-md mx-auto mb-6">
-                        O futuro chegou. Ligue-se aos servidores e encare novos desafios cósmicos.
-                    </p>
+                    <!-- ESTADO 2: EM BREVE (ANOS 2028 ATÉ 2100) -->
+                    <div id="stateComingSoon" class="w-full hidden transition-all duration-500 py-6">
+                        <div class="relative inline-block mb-4">
+                            <span class="absolute inset-0 rounded-full bg-purple-600/20 filter blur-xl animate-ping"></span>
+                            <div class="relative w-16 h-16 rounded-full bg-black/60 border border-purple-500/40 flex items-center justify-center text-purple-400 text-2xl shadow-[0_0_20px_rgba(122,0,255,0.3)]">
+                                <i class="fa-solid fa-hourglass-half animate-spin-slow"></i>
+                            </div>
+                        </div>
+                        <span class="text-[10px] font-retro tracking-[0.2em] text-purple-400 block mb-3 uppercase">ESTADO DE ESPERA ATIVADO</span>
+                        <h2 class="text-4xl md:text-6xl font-extrabold font-orbitron tracking-widest mb-4 glow-text-purple text-transparent bg-clip-text bg-gradient-to-r from-purple-400 via-pink-400 to-cyan-400">
+                            EM BREVE
+                        </h2>
+                        <p class="text-xs md:text-sm text-gray-300 max-w-md mx-auto leading-relaxed mb-6">
+                            Transmissão programada para o setor temporal de <span id="comingSoonYear" class="text-cyan-400 font-bold">2099</span>. Aguarde novas coordenadas.
+                        </p>
+                    </div>
 
-                    <!-- Botão Jogue Agora ligado ao Roblox -->
-                    <a href="https://ro.blox.com/Ebh5?pid=share&is_retargeting=true&af_dp=roblox%3A%2F%2Fnavigation%2Fevent_details%3Feventid%3D5602034195921764912&af_web_dp=https%3A%2F%2Fwww.roblox.com%2Fevents%2F5602034195921764912" 
-                       target="_blank" 
-                       class="btn-cinematic px-8 py-4 rounded-xl font-retro text-xs md:text-sm tracking-widest flex items-center space-x-3 text-white shadow-lg uppercase">
-                        <i class="fa-solid fa-gamepad text-base animate-pulse"></i>
-                        <span>JOGUE AGORA!</span>
-                    </a>
+                    <!-- ESTADO 3: FINALIZADO (JOGUE AGORA / THE AZURE HAS BEEN ARRIVED) -->
+                    <div id="stateFinished" class="w-full hidden py-2 flex flex-col items-center">
+                        
+                        <!-- Banner Retrô Horizontal 16:9 do Ícone do Roblox -->
+                        <div class="relative w-full max-w-md aspect-[16/9] rounded-xl overflow-hidden glow-azure border border-cyan-500/40 shadow-2xl mb-6 group transform hover:scale-[1.01] transition duration-500">
+                            <img src="https://files.catbox.moe/ix81a4.jpeg" alt="Roblox Icon" class="w-full h-full object-cover">
+                            <div class="absolute inset-0 bg-gradient-to-t from-black via-black/30 to-transparent"></div>
+                            <span class="absolute top-3 left-3 bg-red-600 text-white font-retro text-[8px] px-2.5 py-1 rounded uppercase tracking-widest shadow-lg">
+                                DISPONÍVEL AGORA
+                            </span>
+                        </div>
+
+                        <span class="text-[9px] md:text-[10px] font-retro tracking-widest text-cyan-400 mb-3 block animate-bounce uppercase">
+                            ATUALIZAÇÃO CONCLUÍDA
+                        </span>
+                        
+                        <h2 class="text-2xl md:text-4xl font-black font-orbitron text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 via-white to-purple-400 glow-text-azure mb-3 uppercase">
+                            The Azure Has Been Arrived
+                        </h2>
+                        
+                        <p class="text-xs md:text-sm text-gray-300 tracking-wider max-w-md mx-auto mb-6">
+                            O futuro chegou. Conecte-se aos servidores e encare novos desafios cósmicos.
+                        </p>
+
+                        <!-- Botão Jogue Agora linkado ao Roblox -->
+                        <a href="https://www.roblox.com/share?code=77d12fccae9ee64fa427be5caf7518ae&type=ExperienceDetails&stamp=1782440822074" 
+                           target="_blank" 
+                           class="btn-cinematic px-8 py-4 rounded-xl font-retro text-xs md:text-sm tracking-widest flex items-center space-x-3 text-white shadow-lg uppercase">
+                            <i class="fa-solid fa-gamepad text-base animate-pulse"></i>
+                            <span>JOGUE AGORA!</span>
+                        </a>
+                    </div>
+
                 </div>
 
             </div>
+        </section>
 
-        </div>
+        <!-- SEÇÃO DO JOGO (NOVA ABA DINÂMICA) -->
+        <section id="section-game" class="w-full hidden flex flex-col items-center">
+            <div class="text-center mb-6">
+                <h1 class="text-xs font-retro tracking-[0.3em] text-cyan-400 uppercase mb-3 animate-pulse">
+                    // EXPERIÊNCIA DO JOGO //
+                </h1>
+                <h2 class="text-2xl md:text-4xl font-black font-orbitron text-transparent bg-clip-text bg-gradient-to-r from-white to-cyan-400 uppercase">
+                    ALONE
+                </h2>
+            </div>
 
-        <!-- PLAYER DE BANDA SONORA CINEMATOGRÁFICA -->
+            <!-- Card Principal com Capa e Detalhes do Jogo -->
+            <div class="w-full max-w-2xl glass-panel border border-cyan-500/30 rounded-2xl p-6 md:p-8 flex flex-col items-center shadow-2xl relative overflow-hidden">
+                
+                <!-- Moldura Estética de Imagem com Proporção Cinematográfica -->
+                <div class="relative w-full aspect-[21/9] rounded-xl overflow-hidden border border-cyan-500/20 shadow-lg group mb-6">
+                    <img src="https://files.catbox.moe/3qd0u7.png" alt="Capa do Jogo Alone" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700">
+                    <div class="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent"></div>
+                </div>
+
+                <!-- Call To Action de Gameplay -->
+                <h3 class="text-sm md:text-lg font-orbitron font-bold tracking-widest text-center text-white mb-2 uppercase">
+                    Jogue Gratuitamente no Roblox!
+                </h3>
+                <p class="text-[11px] md:text-xs text-gray-400 text-center max-w-md mb-6 leading-relaxed">
+                    Explore o vazio e vivencie uma jornada misteriosa. Novas atualizações e o ecossistema Azure te esperam dentro do servidor.
+                </p>
+
+                <!-- Botão de Gameplay para a Experiência -->
+                <a href="https://www.roblox.com/pt/games/14401188518/Alone" 
+                   target="_blank" 
+                   class="btn-cinematic px-8 py-3.5 rounded-xl font-retro text-[10px] md:text-xs tracking-widest flex items-center space-x-3 text-white shadow-lg uppercase">
+                    <i class="fa-solid fa-play text-xs animate-ping"></i>
+                    <span>ENTRAR NO UNIVERSO</span>
+                </a>
+            </div>
+        </section>
+
+        <!-- PLAYER DE TRILHA SONORA CINEMATOGRÁFICA (Visual Deltarune retrô integrado) -->
         <section id="playlist-section" class="w-full max-w-xl glass-panel border border-cyan-500/20 rounded-xl p-4 mt-8 z-20">
             <div class="flex items-center justify-between border-b border-white/10 pb-2 mb-3">
                 <span class="text-[8px] font-retro text-cyan-400 tracking-wider">
-                    <i class="fa-solid fa-music mr-1 animate-pulse"></i> SELETOR DE BANDA SONORA
+                    <i class="fa-solid fa-music mr-1 animate-pulse"></i> SELETOR DE TRILHA SONORA
                 </span>
                 <span id="track-status" class="text-[7px] font-retro text-gray-500 uppercase">Parado</span>
             </div>
 
-            <!-- Controlos e Painel do Player -->
+            <!-- Controles e Painel do Player -->
             <div class="flex flex-col md:flex-row items-center justify-between gap-3">
                 <!-- Informações da Música -->
                 <div class="text-center md:text-left">
                     <h4 id="current-track-title" class="text-xs font-semibold text-white truncate max-w-[220px]">Nenhuma faixa selecionada</h4>
-                    <p class="text-[9px] text-gray-400">Banda Sonora Oficial da Update</p>
+                    <p class="text-[9px] text-gray-400">Trilha Oficial da Update</p>
                 </div>
 
-                <!-- Botões de Controlo Retro -->
+                <!-- Botões de Controle Retrô -->
                 <div class="flex items-center space-x-3">
                     <button onclick="playPrevTrack()" class="text-gray-400 hover:text-cyan-400 transition-colors p-2 text-sm">
                         <i class="fa-solid fa-backward-step"></i>
@@ -474,102 +481,22 @@
 
     </main>
 
-    <!-- Áudio nativo HTML5 oculto (Sem loop direto para podermos automatizar a transição) -->
-    <audio id="audioPlayer"></audio>
+    <!-- Áudio nativo HTML5 oculto com preload="auto" para pré-carregamento dinâmico das faixas -->
+    <audio id="audioPlayer" preload="auto"></audio>
 
-    <!-- Rodapé -->
+    <!-- Footer / Rodapé -->
     <footer class="w-full max-w-4xl px-4 pt-8 z-20 flex flex-col md:flex-row justify-between items-center text-[10px] text-gray-500 gap-4 text-center">
         <span>&copy; 2026 The Azure Project. Todos os direitos reservados.</span>
         <div class="flex items-center space-x-4">
-            <a href="https://ro.blox.com/Ebh5?pid=share&is_retargeting=true&af_dp=roblox%3A%2F%2Fnavigation%2Fevent_details%3Feventid%3D5602034195921764912&af_web_dp=https%3A%2F%2Fwww.roblox.com%2Fevents%2F5602034195921764912" target="_blank" class="hover:text-cyan-400 transition">Ver Evento no Roblox</a>
+            <!-- Link do Evento no Footer -->
+            <a href="https://www.roblox.com/share?code=77d12fccae9ee64fa427be5caf7518ae&type=ExperienceDetails&stamp=1782440822074" target="_blank" class="hover:text-cyan-400 transition">Ver Evento no Roblox</a>
         </div>
     </footer>
 
-    <!-- ESCUDO DE CLIQUE PARA FECHAR O PAINEL DE SIMULAÇÃO (BACKDROP) -->
-    <div id="settingsBackdrop" class="fixed inset-0 bg-black/70 backdrop-blur-sm z-40 hidden transition-opacity duration-300 opacity-0" onclick="toggleSettings()"></div>
-
-    <!-- PAINEL DE SIMULAÇÃO LATERAL (FECHÁVEL E INTERATIVO) -->
-    <div id="settingsPanel" class="fixed top-0 right-0 h-full w-full max-w-md glass-panel border-l border-cyan-500/20 z-50 p-6 shadow-2xl transition-transform duration-500 transform translate-x-full flex flex-col justify-between">
-        
-        <div>
-            <!-- Cabeçalho do Painel -->
-            <div class="flex justify-between items-center border-b border-white/10 pb-4 mb-6">
-                <h3 class="font-orbitron text-base font-bold text-cyan-400 flex items-center space-x-2">
-                    <i class="fa-solid fa-circle-play"></i>
-                    <span>PAINEL DE SIMULAÇÃO</span>
-                </h3>
-                <!-- Botão Fechar -->
-                <button onclick="toggleSettings()" class="text-gray-400 hover:text-cyan-400 bg-white/5 hover:bg-white/15 w-8 h-8 flex items-center justify-center rounded-lg transition-all duration-200">
-                    <i class="fa-solid fa-xmark text-lg"></i>
-                </button>
-            </div>
-
-            <p class="text-xs text-gray-400 leading-relaxed mb-6">
-                Use os botões de simulação abaixo para testar instantaneamente as regras de data, áudio de clímax automático e transições de ecrã!
-            </p>
-
-            <!-- Presets de Teste -->
-            <div class="space-y-3 mb-6">
-                <h4 class="text-[10px] font-retro text-purple-400 mb-2">Selecione um Preset</h4>
-                
-                <!-- Preset 1: Contagem Ativa convencional (5 minutos) -->
-                <button onclick="setPreset(1)" class="w-full text-left bg-cyan-950/20 hover:bg-cyan-950/40 border border-cyan-500/20 p-3 rounded-lg transition flex items-center justify-between">
-                    <div>
-                        <div class="text-xs font-bold text-cyan-300 font-orbitron">CONTAGEM ATIVA (5 MINUTOS)</div>
-                        <div class="text-[10px] text-gray-400">Inicia com exatamente 5 minutos restantes.</div>
-                    </div>
-                    <i class="fa-solid fa-clock text-cyan-400"></i>
-                </button>
-
-                <!-- Preset especial para teste rápido do Clímax Final (1m 10s) -->
-                <button onclick="setPreset(4)" class="w-full text-left bg-orange-950/20 hover:bg-orange-950/40 border border-orange-500/20 p-3 rounded-lg transition flex items-center justify-between">
-                    <div>
-                        <div class="text-xs font-bold text-orange-300 font-orbitron">TESTAR CLÍMAX (1M 10S)</div>
-                        <div class="text-[10px] text-gray-400">Cai rapidamente para o limite de 60 segundos.</div>
-                    </div>
-                    <i class="fa-solid fa-triangle-exclamation text-orange-400"></i>
-                </button>
-
-                <!-- Preset 2: Em Breve (2099) -->
-                <button onclick="setPreset(2)" class="w-full text-left bg-purple-950/20 hover:bg-purple-950/40 border border-purple-500/20 p-3 rounded-lg transition flex items-center justify-between">
-                    <div>
-                        <div class="text-xs font-bold text-purple-300 font-orbitron">EM BREVE (ANO 2099)</div>
-                        <div class="text-[10px] text-gray-400">Força o ano 2099 (Exibe aviso de "Em Breve").</div>
-                    </div>
-                    <i class="fa-solid fa-hourglass-start text-purple-400"></i>
-                </button>
-
-                <!-- Preset 3: Finalizado -->
-                <button onclick="setPreset(3)" class="w-full text-left bg-green-950/20 hover:bg-green-950/40 border border-green-500/20 p-3 rounded-lg transition flex items-center justify-between">
-                    <div>
-                        <div class="text-xs font-bold text-green-300 font-orbitron">UNIVERSO LANÇADO</div>
-                        <div class="text-[10px] text-gray-400">Simula o timer a bater 0 imediatamente.</div>
-                    </div>
-                    <i class="fa-solid fa-circle-check text-green-400"></i>
-                </button>
-            </div>
-
-            <!-- Formulário Manual -->
-            <div class="space-y-3">
-                <h4 class="text-[10px] font-retro text-cyan-400 mb-1">Escolher Data Manual</h4>
-                <input type="datetime-local" id="manualDateInput" class="w-full bg-black/60 border border-white/20 rounded p-2 text-xs text-white focus:outline-none focus:border-cyan-500">
-                <button onclick="applyManualDate()" class="w-full bg-cyan-500 hover:bg-cyan-400 text-black font-bold text-xs py-2 rounded tracking-widest font-orbitron transition">
-                    APLICAR NOVA DATA
-                </button>
-            </div>
-        </div>
-
-        <div class="bg-black/50 p-4 rounded-lg border border-white/5 text-[11px] text-gray-400">
-            <span class="text-white font-bold block mb-1">Banda Sonora Automática:</span>
-            Se estiver em contagem regressiva e o tempo for inferior a 60 segundos, a música mudará dinamicamente para a faixa dramática final!
-        </div>
-
-    </div>
-
-    <!-- NOTIFICAÇÃO NO ECRÃ -->
+    <!-- NOTIFICAÇÃO NA TELA -->
     <div id="toast" class="fixed bottom-6 left-6 glass-panel border border-cyan-500/40 text-cyan-300 text-xs font-orbitron tracking-widest px-4 py-3 rounded-lg shadow-2xl z-50 transform translate-y-24 opacity-0 transition duration-500 flex items-center space-x-2">
         <i class="fa-solid fa-circle-info animate-bounce"></i>
-        <span id="toastMsg">Simulação ativada!</span>
+        <span id="toastMsg">Alteração aplicada!</span>
     </div>
 
     <script>
@@ -584,29 +511,55 @@
 
         let currentTrackIndex = 0;
         let isMuted = false;
-        let isPanelOpen = false;
         let timerInterval = null;
-        let isClimaxTrackTriggered = false; // Controla se a faixa de clímax já foi acionada
-        let finishedAnimationTriggered = false; // Garante que a transição de finalização só ocorre uma vez
+        let isClimaxTrackTriggered = false; // Flag para controlar se a música de clímax já foi acionada
+        let hasReachedZeroTriggered = false; // Flag para garantir que a animação final ocorra só uma vez por ciclo
 
-        // Inicializa o alvo do timer padrão (Contagem ativa inicial de exatamente 5 minutos)
+        // Inicializa o alvo do timer com exatamente 5 MINUTOS restantes por padrão
         let targetDate = new Date();
         targetDate.setMinutes(targetDate.getMinutes() + 5);
 
         const audioPlayer = document.getElementById('audioPlayer');
 
-        // Monitoriza o fim de cada música para iniciar a próxima automaticamente
-        audioPlayer.addEventListener('ended', function() {
-            playNextTrack();
-        });
-
         // ==========================================
         //  GERENCIADOR DE TRILHAS SONORAS (PLAYLIST)
         // ==========================================
+        // Inicializa o player e configura o pré-carregamento agressivo de metadados de todas as faixas
         function initMusic() {
             audioPlayer.src = tracks[currentTrackIndex].url;
+            audioPlayer.load(); // Carrega antecipadamente a primeira música
             document.getElementById('current-track-title').innerText = tracks[currentTrackIndex].name;
             highlightTrackInList();
+
+            // Configurar avanço automático para a próxima música ao finalizar a atual
+            audioPlayer.addEventListener('ended', handleTrackEnded);
+
+            // Pré-carregamento das outras faixas em segundo plano
+            preloadAllTracks();
+        }
+
+        // Função de pré-carregamento auxiliar em segundo plano (usa cache nativo do navegador)
+        function preloadAllTracks() {
+            tracks.forEach(track => {
+                const audioLink = document.createElement('link');
+                audioLink.rel = 'prefetch';
+                audioLink.href = track.url;
+                audioLink.as = 'audio';
+                document.head.appendChild(audioLink);
+            });
+        }
+
+        // Função que lida com o encerramento automático da faixa
+        function handleTrackEnded() {
+            let nextIndex = (currentTrackIndex + 1) % tracks.length;
+            
+            // Regra: Não toca a de "clímax final" (index 3) de forma automática.
+            // Pula ela se a contagem ainda não estiver abaixo de 60 segundos
+            if (nextIndex === 3 && !isClimaxTrackTriggered) {
+                nextIndex = (nextIndex + 1) % tracks.length; // Avança para a 5ª música (Nebula Beats)
+            }
+            
+            selectTrack(nextIndex);
         }
 
         function highlightTrackInList() {
@@ -624,31 +577,28 @@
             }
         }
 
-        // Tocar faixa manualmente
+        // Seleção de música manual ou automática
         function selectTrack(index) {
             currentTrackIndex = index;
             audioPlayer.src = tracks[currentTrackIndex].url;
+            audioPlayer.load(); // Re-instancia o buffer do áudio para playback imediato
             document.getElementById('current-track-title').innerText = tracks[currentTrackIndex].name;
             highlightTrackInList();
-            
-            // Se o utilizador selecionou manualmente a do climax, marcamos como "permitida" temporariamente para não saltar
-            if (index === 3) {
-                isClimaxTrackTriggered = true;
-            }
-
-            audioPlayer.play().catch(() => {
-                showToast("Interação necessária para iniciar áudio");
+            audioPlayer.play().then(() => {
+                updatePlayerUI(true);
+            }).catch(() => {
+                updatePlayerUI(false);
             });
-            updatePlayerUI(true);
-            showToast(`A tocar: ${tracks[currentTrackIndex].name}`);
+            showToast(`Tocando: ${tracks[currentTrackIndex].name}`);
         }
 
         function togglePlayMusic() {
             if (audioPlayer.paused) {
-                audioPlayer.play().catch(() => {
+                audioPlayer.play().then(() => {
+                    updatePlayerUI(true);
+                }).catch(() => {
                     showToast("Por favor, clique para autorizar áudio");
                 });
-                updatePlayerUI(true);
             } else {
                 audioPlayer.pause();
                 updatePlayerUI(false);
@@ -660,7 +610,7 @@
             const statusText = document.getElementById('track-status');
             if (isPlaying) {
                 playBtn.innerHTML = '<i class="fa-solid fa-pause text-xs"></i>';
-                statusText.innerText = "A tocar";
+                statusText.innerText = "Tocando";
                 statusText.classList.add('text-cyan-400');
                 statusText.classList.remove('text-gray-500');
             } else {
@@ -671,27 +621,14 @@
             }
         }
 
-        // Próxima faixa inteligente (salta o Clímax Final a menos que esteja ativado)
         function playNextTrack() {
-            let nextIndex = (currentTrackIndex + 1) % tracks.length;
-            
-            // Regra: Não toca a do Clímax (index 3) a menos que o timer esteja abaixo de 60s ou ativado manualmente
-            if (nextIndex === 3 && !isClimaxTrackTriggered) {
-                nextIndex = (nextIndex + 1) % tracks.length; 
-            }
-            
-            selectTrack(nextIndex);
+            currentTrackIndex = (currentTrackIndex + 1) % tracks.length;
+            selectTrack(currentTrackIndex);
         }
 
-        // Faixa anterior inteligente
         function playPrevTrack() {
-            let prevIndex = (currentTrackIndex - 1 + tracks.length) % tracks.length;
-            
-            if (prevIndex === 3 && !isClimaxTrackTriggered) {
-                prevIndex = (prevIndex - 1 + tracks.length) % tracks.length;
-            }
-            
-            selectTrack(prevIndex);
+            currentTrackIndex = (currentTrackIndex - 1 + tracks.length) % tracks.length;
+            selectTrack(currentTrackIndex);
         }
 
         function toggleMute() {
@@ -708,6 +645,38 @@
         }
 
         // ==========================================
+        //  SISTEMA DE NAVEGAÇÃO DE ABAS DINÂMICAS
+        // ==========================================
+        function switchTab(tabId) {
+            const timerSection = document.getElementById('section-timer');
+            const gameSection = document.getElementById('section-game');
+            const tabBtnTimer = document.getElementById('tabBtn-timer');
+            const tabBtnGame = document.getElementById('tabBtn-game');
+
+            if (tabId === 'timer') {
+                // Ativar Aba do Timer
+                timerSection.classList.remove('hidden');
+                gameSection.classList.add('hidden');
+                
+                tabBtnTimer.classList.add('text-cyan-400', 'border-b-2', 'border-cyan-400', 'pb-1.5', 'md:pb-3');
+                tabBtnTimer.classList.remove('text-gray-400');
+
+                tabBtnGame.classList.add('text-gray-400');
+                tabBtnGame.classList.remove('text-cyan-400', 'border-b-2', 'border-cyan-400', 'pb-1.5', 'md:pb-3');
+            } else if (tabId === 'game') {
+                // Ativar Aba do Jogo
+                gameSection.classList.remove('hidden');
+                timerSection.classList.add('hidden');
+
+                tabBtnGame.classList.add('text-cyan-400', 'border-b-2', 'border-cyan-400', 'pb-1.5', 'md:pb-3');
+                tabBtnGame.classList.remove('text-gray-400');
+
+                tabBtnTimer.classList.add('text-gray-400');
+                tabBtnTimer.classList.remove('text-cyan-400', 'border-b-2', 'border-cyan-400', 'pb-1.5', 'md:pb-3');
+            }
+        }
+
+        // ==========================================
         //  CONTROLE DO TIMER & FLUXO DE REGRAS
         // ==========================================
         function evaluateTimer() {
@@ -719,75 +688,46 @@
             const stateComingSoon = document.getElementById('stateComingSoon');
             const stateFinished = document.getElementById('stateFinished');
             const mainCard = document.getElementById('mainDisplayCard');
-            const stains = document.getElementById('cornerStains');
+            const cornerStains = document.getElementById('cornerStains');
 
-            // Limpa as animações e estilos residuais de transição
-            stateCountdown.classList.remove('fade-out-active');
-            stateFinished.classList.remove('animate-jump');
+            mainCard.classList.remove('glow-purple', 'glow-azure');
+            stateCountdown.classList.remove('timer-fade-out');
+            stateFinished.classList.remove('update-bounce-jump');
+            cornerStains.classList.remove('active');
 
             if (timerInterval) clearInterval(timerInterval);
 
             // REGRA 1: Ano entre 2028 e 2100 -> Mostrar "Em Breve"
             if (year >= 2028 && year <= 2100) {
+                hasReachedZeroTriggered = false;
                 stateCountdown.classList.add('hidden');
                 stateFinished.classList.add('hidden');
                 stateComingSoon.classList.remove('hidden');
-                mainCard.classList.remove('glow-azure');
                 mainCard.classList.add('glow-purple');
-                stains.classList.remove('active');
-                finishedAnimationTriggered = false;
                 document.getElementById('comingSoonYear').innerText = year;
             }
-            // REGRA 2: Chegou a zero ou passou do tempo -> Fade out + Salto da Update + Manchas
+            // REGRA 2: Chegou a zero ou passou do tempo -> Lançamento Direto
             else if (difference <= 0) {
+                stateCountdown.classList.add('hidden');
                 stateComingSoon.classList.add('hidden');
-                stains.classList.add('active'); // Ativa manchas roxas/azuis nos cantos imediatamente
-
-                if (!finishedAnimationTriggered) {
-                    finishedAnimationTriggered = true;
-                    
-                    // Se o countdown estava visível, faz o fade out cinematográfico
-                    if (!stateCountdown.classList.contains('hidden')) {
-                        stateCountdown.classList.add('fade-out-active');
-                        
-                        // Espera o fade-out de 800ms acabar antes de trocar e saltar
-                        setTimeout(() => {
-                            stateCountdown.classList.add('hidden');
-                            stateFinished.classList.remove('hidden');
-                            stateFinished.classList.add('animate-jump');
-                            mainCard.classList.remove('glow-purple');
-                            mainCard.classList.add('glow-azure');
-                        }, 800);
-                    } else {
-                        // Se já carregou diretamente no fim
-                        stateCountdown.classList.add('hidden');
-                        stateFinished.classList.remove('hidden');
-                        stateFinished.classList.add('animate-jump');
-                        mainCard.classList.remove('glow-purple');
-                        mainCard.classList.add('glow-azure');
-                    }
-                } else {
-                    stateCountdown.classList.add('hidden');
-                    stateFinished.classList.remove('hidden');
-                    mainCard.classList.remove('glow-purple');
-                    mainCard.classList.add('glow-azure');
-                }
+                stateFinished.classList.remove('hidden');
+                stateFinished.classList.add('update-bounce-jump');
+                mainCard.classList.add('glow-azure');
+                cornerStains.classList.add('active');
+                hasReachedZeroTriggered = true;
             }
-            // REGRA 3: Menor que 2028 e no futuro -> Timer Regressivo
+            // REGRA 3: Temporizador Ativo
             else {
+                hasReachedZeroTriggered = false;
                 stateComingSoon.classList.add('hidden');
                 stateFinished.classList.add('hidden');
                 stateCountdown.classList.remove('hidden');
-                mainCard.classList.remove('glow-purple');
                 mainCard.classList.add('glow-azure');
-                stains.classList.remove('active');
-                finishedAnimationTriggered = false;
 
-                // Define display de texto da data alvo
                 const options = { year: 'numeric', month: 'long', day: 'numeric', hour: '2-digit', minute: '2-digit' };
-                document.getElementById('targetDateDisplay').innerText = targetDate.toLocaleDateString('pt-PT', options);
+                document.getElementById('targetDateDisplay').innerText = targetDate.toLocaleDateString('pt-BR', options);
 
-                isClimaxTrackTriggered = false; // Reset da música dramática automática ao voltar a contagem
+                isClimaxTrackTriggered = false;
                 runClockUpdate();
                 timerInterval = setInterval(runClockUpdate, 1000);
             }
@@ -799,15 +739,40 @@
 
             if (difference <= 0) {
                 clearInterval(timerInterval);
-                evaluateTimer();
+                
+                if (!hasReachedZeroTriggered) {
+                    hasReachedZeroTriggered = true;
+                    
+                    // Ativa as manchas roxas nos cantos
+                    document.getElementById('cornerStains').classList.add('active');
+                    
+                    // Aplica fade out
+                    const stateCountdown = document.getElementById('stateCountdown');
+                    stateCountdown.classList.add('timer-fade-out');
+                    
+                    // Altera estados após a animação de fade terminar
+                    setTimeout(() => {
+                        stateCountdown.classList.add('hidden');
+                        const stateFinished = document.getElementById('stateFinished');
+                        stateFinished.classList.remove('hidden');
+                        stateFinished.classList.add('update-bounce-jump');
+                        
+                        const mainCard = document.getElementById('mainDisplayCard');
+                        mainCard.classList.remove('glow-purple');
+                        mainCard.classList.add('glow-azure');
+                        
+                        showToast("ATUALIZAÇÃO LANÇADA!");
+                    }, 1000);
+                }
                 return;
             }
 
-            // Ativação da música final se estiver abaixo de 60 segundos
+            // Ativação automática do Clímax Final aos 60 segundos restantes
             if (difference < 60000 && !isClimaxTrackTriggered) {
                 isClimaxTrackTriggered = true;
-                currentTrackIndex = 3; // Força trilha al68kf.mp3 (Clímax Final)
+                currentTrackIndex = 3; // Força Clímax Final (Índice 3)
                 audioPlayer.src = tracks[currentTrackIndex].url;
+                audioPlayer.load();
                 document.getElementById('current-track-title').innerText = tracks[currentTrackIndex].name;
                 highlightTrackInList();
                 audioPlayer.play().catch(() => {});
@@ -824,66 +789,6 @@
             document.getElementById('hours').innerText = String(h).padStart(2, '0');
             document.getElementById('minutes').innerText = String(m).padStart(2, '0');
             document.getElementById('seconds').innerText = String(s).padStart(2, '0');
-        }
-
-        // ==========================================
-        //  PAINEL DE SIMULAÇÃO LATERAL (ABRE E FECHA)
-        // ==========================================
-        function toggleSettings() {
-            const panel = document.getElementById('settingsPanel');
-            const backdrop = document.getElementById('settingsBackdrop');
-
-            if (isPanelOpen) {
-                panel.style.transform = "translateX(100%)";
-                backdrop.classList.add('hidden');
-                backdrop.style.opacity = "0";
-                isPanelOpen = false;
-            } else {
-                panel.style.transform = "translateX(0)";
-                backdrop.classList.remove('hidden');
-                setTimeout(() => { backdrop.style.opacity = "1"; }, 10);
-                isPanelOpen = true;
-            }
-        }
-
-        function setPreset(id) {
-            const now = new Date();
-            if (id === 1) {
-                // Relógio ativo com exatamente 5 minutos restantes
-                targetDate = new Date(now.getTime() + 300000);
-                showToast("Preset: Contagem regressiva ativa (5 minutos restantes)");
-            } else if (id === 2) {
-                // Em breve no ano 2099
-                targetDate = new Date('2099-12-31T23:59:59');
-                showToast("Preset: 'Em Breve' (Ano 2099)");
-            } else if (id === 3) {
-                // Finalizado imediatamente para ver manchas e o salto da update
-                targetDate = new Date(now.getTime() - 1000);
-                showToast("Preset: Transmissão Concluída!");
-            } else if (id === 4) {
-                // Relógio ativo com 1 minuto e 10 segundos restantes para simular a aproximação do Clímax
-                targetDate = new Date(now.getTime() + 70000);
-                showToast("Preset: Clímax de 60 segundos a aproximar-se");
-            }
-            syncInputPicker();
-            evaluateTimer();
-        }
-
-        function applyManualDate() {
-            const input = document.getElementById('manualDateInput');
-            if (input.value) {
-                targetDate = new Date(input.value);
-                showToast("Nova data manual aplicada!");
-                evaluateTimer();
-            } else {
-                showToast("Insira uma data válida!");
-            }
-        }
-
-        function syncInputPicker() {
-            const picker = document.getElementById('manualDateInput');
-            const offset = targetDate.getTimezoneOffset() * 60000;
-            picker.value = (new Date(targetDate.getTime() - offset)).toISOString().slice(0, 16);
         }
 
         function showToast(message) {
@@ -924,7 +829,7 @@
                 this.size = Math.random() * 1.8 + 0.6;
                 this.speedY = -(Math.random() * 0.5 + 0.1);
                 this.speedX = (Math.random() - 0.5) * 0.2;
-                this.alpha = Math.random() * 0.3 + 0.1;
+                this.alpha = Math.random() * 0.4 + 0.1;
                 this.color = Math.random() > 0.5 ? 'rgba(0, 210, 255, ' : 'rgba(122, 0, 255, ';
             }
 
@@ -969,7 +874,6 @@
             animate();
             initMusic();
             evaluateTimer();
-            syncInputPicker();
         }
     </script>
 </body>
