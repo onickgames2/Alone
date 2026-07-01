@@ -9,7 +9,7 @@
     <!-- Google Fonts: Orbitron, Montserrat e Press Start 2P para o clima retrô/cinematográfico -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;800&family=Orbitron:wght@400;700;900&family=Press+Start+2P&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700;800;900&family=Orbitron:wght@400;700;900&family=Press+Start+2P&display=swap" rel="stylesheet">
     <!-- FontAwesome para Ícones -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
@@ -17,12 +17,19 @@
         :root {
             --color-azure: #00d2ff;
             --color-purple: #7a00ff;
-            --bg-dark: #000000;
+            --bg-dark: #020205;
         }
 
+        /* Fundo principal estilizado com a arte de capa oficial do jogo mesclada com sombras escuras */
         body {
             font-family: 'Montserrat', sans-serif;
             background-color: var(--bg-dark);
+            background-image: 
+                radial-gradient(circle at 50% 50%, rgba(2, 2, 5, 0.6) 0%, rgba(2, 2, 5, 0.98) 100%), 
+                url('https://files.catbox.moe/3qd0u7.png');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
             overflow-x: hidden;
             position: relative;
         }
@@ -45,11 +52,11 @@
             pointer-events: none;
             z-index: 5;
             background: 
-                radial-gradient(circle at 0% 0%, rgba(122, 0, 255, 0.22) 0%, transparent 45%),
-                radial-gradient(circle at 100% 0%, rgba(0, 210, 255, 0.22) 0%, transparent 45%),
-                radial-gradient(circle at 100% 100%, rgba(122, 0, 255, 0.25) 0%, transparent 50%),
-                radial-gradient(circle at 0% 100%, rgba(0, 210, 255, 0.25) 0%, transparent 50%),
-                radial-gradient(circle at 50% 50%, transparent 20%, rgba(0, 0, 0, 0.95) 100%);
+                radial-gradient(circle at 0% 0%, rgba(122, 0, 255, 0.15) 0%, transparent 45%),
+                radial-gradient(circle at 100% 0%, rgba(0, 210, 255, 0.15) 0%, transparent 45%),
+                radial-gradient(circle at 100% 100%, rgba(122, 0, 255, 0.2) 0%, transparent 50%),
+                radial-gradient(circle at 0% 100%, rgba(0, 210, 255, 0.2) 0%, transparent 50%),
+                radial-gradient(circle at 50% 50%, transparent 30%, rgba(0, 0, 0, 0.95) 100%);
         }
 
         /* Manchas roxas com azul nos cantos quando o timer zera */
@@ -79,7 +86,7 @@
             position: absolute;
             width: 700px;
             height: 700px;
-            background: radial-gradient(circle, rgba(122, 0, 255, 0.1) 0%, rgba(0, 210, 255, 0.04) 50%, transparent 100%);
+            background: radial-gradient(circle, rgba(122, 0, 255, 0.08) 0%, rgba(0, 210, 255, 0.03) 50%, transparent 100%);
             top: -15%;
             left: -10%;
             filter: blur(120px);
@@ -91,7 +98,7 @@
             position: absolute;
             width: 800px;
             height: 800px;
-            background: radial-gradient(circle, rgba(0, 210, 255, 0.12) 0%, rgba(122, 0, 255, 0.04) 50%, transparent 100%);
+            background: radial-gradient(circle, rgba(0, 210, 255, 0.1) 0%, rgba(122, 0, 255, 0.03) 50%, transparent 100%);
             bottom: -20%;
             right: -15%;
             filter: blur(140px);
@@ -137,28 +144,28 @@
         }
 
         .neon-glow-purple {
-            filter: drop-shadow(0 0 8px rgba(122, 0, 255, 0.6));
+            filter: drop-shadow(0 0 8px rgba(93, 89, 243, 0.6));
         }
 
         .glow-text-azure {
-            text-shadow: 0 0 12px rgba(0, 210, 255, 0.8), 0 0 25px rgba(0, 210, 255, 0.4);
+            text-shadow: 0 0 10px rgba(0, 210, 255, 0.8), 0 0 20px rgba(0, 210, 255, 0.4);
         }
 
         .glow-text-purple {
-            text-shadow: 0 0 12px rgba(122, 0, 255, 0.8), 0 0 25px rgba(122, 0, 255, 0.4);
+            text-shadow: 0 0 12px rgba(93, 89, 243, 0.8), 0 0 25px rgba(93, 89, 243, 0.4);
         }
 
-        /* Painel Glassmorphism */
+        /* Painel Glassmorphism aprimorado - estilo screenshot */
         .glass-panel {
-            background: rgba(3, 1, 10, 0.85);
-            backdrop-filter: blur(16px);
-            -webkit-backdrop-filter: blur(16px);
-            border: 1px solid rgba(255, 255, 255, 0.05);
+            background: rgba(8, 12, 28, 0.65);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
         }
 
         /* Botão Cinematográfico */
         .btn-cinematic {
-            background: linear-gradient(135deg, rgba(0,210,255,0.9) 0%, rgba(122,0,255,0.9) 100%);
+            background: linear-gradient(135deg, rgba(0,210,255,0.9) 0%, rgba(93,89,243,0.9) 100%);
             transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
             position: relative;
             overflow: hidden;
@@ -180,17 +187,7 @@
 
         .btn-cinematic:hover {
             transform: translateY(-3px) scale(1.02);
-            box-shadow: 0 10px 30px rgba(0, 210, 255, 0.6), 0 0 15px rgba(122, 0, 255, 0.6);
-        }
-
-        /* Animação de pulso sutil */
-        @keyframes subtlePulse {
-            0%, 100% { opacity: 0.8; transform: scale(1); }
-            50% { opacity: 1; transform: scale(1.03); }
-        }
-
-        .pulse-active {
-            animation: subtlePulse 3s infinite ease-in-out;
+            box-shadow: 0 10px 30px rgba(0, 210, 255, 0.6), 0 0 15px rgba(93, 89, 243, 0.6);
         }
 
         /* ANIMAÇÃO DE FADE OUT DO TIMER */
@@ -222,11 +219,12 @@
     <div class="cosmic-dust-1"></div>
     <div class="cosmic-dust-2"></div>
     <div class="cinematic-vignette"></div>
+
     <!-- Manchas roxas com azul adicionadas dinamicamente no término -->
     <div id="cornerStains" class="zero-hour-stains"></div>
 
     <!-- Canvas para Partículas Celestiais -->
-    <canvas id="particleCanvas" class="fixed top-0 left-0 w-full h-full pointer-events-none z-0 opacity-30"></canvas>
+    <canvas id="particleCanvas" class="fixed top-0 left-0 w-full h-full pointer-events-none z-0 opacity-20"></canvas>
 
     <!-- MENU DE CABEÇALHO RETRÔ (Sticky/Preso no Topo com visual translúcido) -->
     <header class="sticky top-0 left-0 w-full z-40 bg-black/85 backdrop-blur-md border-b border-white/10 py-3 md:py-4 px-4 flex flex-col items-center">
@@ -283,110 +281,117 @@
     </svg>
 
     <!-- CONTEÚDO PRINCIPAL (MÓDULO CENTRAL DO EVENTO) -->
-    <main class="w-full max-w-3xl px-4 z-20 flex-grow flex flex-col justify-center items-center py-8">
+    <main class="w-full max-w-2xl px-4 z-20 flex-grow flex flex-col justify-center items-center py-10">
         
-        <!-- SEÇÃO DO TIMER (CONTEÚDO PRINCIPAL INICIAL) -->
-        <section id="section-timer" class="w-full flex flex-col items-center">
-            <!-- Bloco Principal de Apresentação da Update -->
-            <div class="text-center mb-8">
-                <h1 class="text-xs font-retro tracking-[0.3em] text-purple-400 uppercase mb-4 animate-pulse">
-                    // AZURE SYSTEM ONLINE //
-                </h1>
-                <h2 class="text-3xl md:text-5xl font-extrabold tracking-wider font-orbitron text-transparent bg-clip-text bg-gradient-to-r from-white via-cyan-200 to-purple-400 uppercase">
-                    The Azure Update
+        <!-- SEÇÃO DO TIMER (CONTEÚDO PRINCIPAL INICIAL NOVO ESTILO) -->
+        <section id="section-timer" class="w-full flex flex-col items-start">
+            
+            <!-- Bloco de Título Reconstruído (Alinhado à Esquerda) -->
+            <div class="text-left w-full mb-6">
+                <h2 class="text-4xl md:text-6xl font-black tracking-tight text-white leading-none font-orbitron mb-5">
+                    The Azure<br>
+                    <span class="text-[#5d59f3] glow-text-purple">Update</span>
                 </h2>
+                <p id="labelCountdownStatus" class="text-xs md:text-sm text-gray-400 font-medium tracking-wide">
+                    Sinal de liberação detectado em:
+                </p>
             </div>
 
-            <!-- CARD DO TIMER (Estilo console do vídeo) -->
-            <div id="mainDisplayCard" class="w-full glass-panel rounded-2xl overflow-hidden shadow-2xl transition-all duration-700 glow-purple relative flex flex-col justify-center items-center p-6 md:p-10 min-h-[380px]">
+            <!-- CARD DO TIMER ESTILIZADO -->
+            <div id="mainDisplayCard" class="w-full glass-panel rounded-3xl overflow-hidden shadow-2xl transition-all duration-700 relative p-6 md:p-8 min-h-[160px] flex flex-col justify-center">
                 
-                <!-- Imagem de Fundo opaca e cinematográfica -->
-                <div class="absolute inset-0 z-0 bg-cover bg-center opacity-20 filter blur-[1px]" style="background-image: url('https://files.catbox.moe/giushq.png');"></div>
-                <div class="absolute inset-0 bg-gradient-to-t from-black via-black/80 to-transparent z-0"></div>
-
-                <div id="cardContent" class="w-full z-10 flex flex-col items-center justify-center text-center">
+                <div id="cardContent" class="w-full z-10">
                     
-                    <!-- ESTADO 1: TIMER REGRESSIVO ATIVO -->
+                    <!-- ESTADO 1: TIMER REGRESSIVO ATIVO (No estilo do mockup) -->
                     <div id="stateCountdown" class="w-full transition-all duration-500">
-                        <span class="text-[9px] md:text-[11px] font-retro tracking-widest text-cyan-400 mb-6 block uppercase">
-                            Sinal de liberação detectado em:
-                        </span>
-                        
-                        <!-- Display do Timer com design clean e neon -->
-                        <div class="grid grid-cols-2 md:grid-cols-4 gap-4 max-w-xl mx-auto mb-8 font-orbitron">
+                        <div class="flex items-center justify-between px-2 md:px-6 font-orbitron text-white">
                             <!-- Dias -->
-                            <div class="bg-black/60 border border-cyan-500/20 px-3 py-5 rounded-lg flex flex-col items-center">
-                                <span id="days" class="text-3xl md:text-5xl font-bold text-white glow-text-azure">00</span>
-                                <span class="text-[9px] tracking-widest text-cyan-400 font-semibold uppercase mt-1">Dias</span>
+                            <div class="flex flex-col items-center">
+                                <span id="days" class="text-4xl md:text-6xl font-bold glow-text-azure">00</span>
+                                <span class="text-[9px] md:text-[10px] tracking-widest text-gray-400 uppercase mt-2">Dias</span>
                             </div>
+                            <!-- Separador -->
+                            <span class="text-3xl md:text-5xl font-semibold text-[#00d2ff] opacity-80 mb-6">:</span>
                             <!-- Horas -->
-                            <div class="bg-black/60 border border-purple-500/20 px-3 py-5 rounded-lg flex flex-col items-center">
-                                <span id="hours" class="text-3xl md:text-5xl font-bold text-white glow-text-purple">00</span>
-                                <span class="text-[9px] tracking-widest text-purple-400 font-semibold uppercase mt-1">Horas</span>
+                            <div class="flex flex-col items-center">
+                                <span id="hours" class="text-4xl md:text-6xl font-bold glow-text-azure">00</span>
+                                <span class="text-[9px] md:text-[10px] tracking-widest text-gray-400 uppercase mt-2">Horas</span>
                             </div>
+                            <!-- Separador -->
+                            <span class="text-3xl md:text-5xl font-semibold text-[#00d2ff] opacity-80 mb-6">:</span>
                             <!-- Minutos -->
-                            <div class="bg-black/60 border border-cyan-500/20 px-3 py-5 rounded-lg flex flex-col items-center">
-                                <span id="minutes" class="text-3xl md:text-5xl font-bold text-white glow-text-azure">00</span>
-                                <span class="text-[9px] tracking-widest text-cyan-400 font-semibold uppercase mt-1">Minutos</span>
+                            <div class="flex flex-col items-center">
+                                <span id="minutes" class="text-4xl md:text-6xl font-bold glow-text-azure">00</span>
+                                <span class="text-[9px] md:text-[10px] tracking-widest text-gray-400 uppercase mt-2">Min</span>
                             </div>
+                            <!-- Separador -->
+                            <span class="text-3xl md:text-5xl font-semibold text-[#00d2ff] opacity-80 mb-6">:</span>
                             <!-- Segundos -->
-                            <div class="bg-black/60 border border-purple-500/20 px-3 py-5 rounded-lg flex flex-col items-center">
-                                <span id="seconds" class="text-3xl md:text-5xl font-bold text-white glow-text-purple">00</span>
-                                <span class="text-[9px] tracking-widest text-purple-400 font-semibold uppercase mt-1">Segundos</span>
+                            <div class="flex flex-col items-center">
+                                <span id="seconds" class="text-4xl md:text-6xl font-bold glow-text-azure">00</span>
+                                <span class="text-[9px] md:text-[10px] tracking-widest text-gray-400 uppercase mt-2">Seg</span>
                             </div>
                         </div>
 
-                        <p class="text-xs text-gray-400 tracking-widest font-mono">
-                            DATA DE CHEGADA: <span id="targetDateDisplay" class="text-cyan-300 font-bold">---</span>
-                        </p>
+                        <!-- Divisor do Card -->
+                        <div class="border-t border-white/10 my-5"></div>
+
+                        <!-- Footer do Card -->
+                        <div class="px-2 md:px-6 text-left font-orbitron">
+                            <span class="text-[9px] md:text-[10px] font-bold tracking-widest text-cyan-400 block uppercase mb-1">
+                                DATA DE CHEGADA
+                            </span>
+                            <span id="targetDateDisplay" class="text-sm md:text-lg font-bold text-white tracking-wide">
+                                3 de julho de 2026 · 19:30
+                            </span>
+                        </div>
                     </div>
 
                     <!-- ESTADO 2: EM BREVE (ANOS 2028 ATÉ 2100) -->
-                    <div id="stateComingSoon" class="w-full hidden transition-all duration-500 py-6">
+                    <div id="stateComingSoon" class="w-full hidden transition-all duration-500 py-4 text-center">
                         <div class="relative inline-block mb-4">
-                            <span class="absolute inset-0 rounded-full bg-purple-600/20 filter blur-xl animate-ping"></span>
-                            <div class="relative w-16 h-16 rounded-full bg-black/60 border border-purple-500/40 flex items-center justify-center text-purple-400 text-2xl shadow-[0_0_20px_rgba(122,0,255,0.3)]">
+                            <span class="absolute inset-0 rounded-full bg-[#5d59f3]/20 filter blur-xl animate-ping"></span>
+                            <div class="relative w-14 h-14 rounded-full bg-black/60 border border-[#5d59f3]/40 flex items-center justify-center text-[#5d59f3] text-xl shadow-[0_0_20px_rgba(93,89,243,0.3)]">
                                 <i class="fa-solid fa-hourglass-half animate-spin-slow"></i>
                             </div>
                         </div>
-                        <span class="text-[10px] font-retro tracking-[0.2em] text-purple-400 block mb-3 uppercase">ESTADO DE ESPERA ATIVADO</span>
-                        <h2 class="text-4xl md:text-6xl font-extrabold font-orbitron tracking-widest mb-4 glow-text-purple text-transparent bg-clip-text bg-gradient-to-r from-purple-400 via-pink-400 to-cyan-400">
+                        <span class="text-[9px] font-retro tracking-[0.2em] text-[#5d59f3] block mb-2 uppercase">ESTADO DE ESPERA ATIVADO</span>
+                        <h2 class="text-3xl md:text-5xl font-extrabold font-orbitron tracking-widest mb-3 glow-text-purple text-transparent bg-clip-text bg-gradient-to-r from-[#5d59f3] via-pink-400 to-cyan-400">
                             EM BREVE
                         </h2>
-                        <p class="text-xs md:text-sm text-gray-300 max-w-md mx-auto leading-relaxed mb-6">
+                        <p class="text-xs text-gray-300 max-w-md mx-auto leading-relaxed">
                             Transmissão programada para o setor temporal de <span id="comingSoonYear" class="text-cyan-400 font-bold">2099</span>. Aguarde novas coordenadas.
                         </p>
                     </div>
 
                     <!-- ESTADO 3: FINALIZADO (JOGUE AGORA / THE AZURE HAS BEEN ARRIVED) -->
-                    <div id="stateFinished" class="w-full hidden py-2 flex flex-col items-center">
-                        
-                        <!-- Banner Retrô Horizontal 16:9 do Ícone do Roblox -->
-                        <div class="relative w-full max-w-md aspect-[16/9] rounded-xl overflow-hidden glow-azure border border-cyan-500/40 shadow-2xl mb-6 group transform hover:scale-[1.01] transition duration-500">
+                    <div id="stateFinished" class="w-full hidden py-2 flex flex-col items-center text-center">
+                        <!-- Banner Retrô Horizontal do Ícone do Roblox -->
+                        <div class="relative w-full max-w-sm aspect-[16/9] rounded-xl overflow-hidden glow-azure border border-cyan-500/40 shadow-2xl mb-5 group transform hover:scale-[1.01] transition duration-500">
                             <img src="https://files.catbox.moe/ix81a4.jpeg" alt="Roblox Icon" class="w-full h-full object-cover">
                             <div class="absolute inset-0 bg-gradient-to-t from-black via-black/30 to-transparent"></div>
-                            <span class="absolute top-3 left-3 bg-red-600 text-white font-retro text-[8px] px-2.5 py-1 rounded uppercase tracking-widest shadow-lg">
+                            <span class="absolute top-3 left-3 bg-red-600 text-white font-retro text-[7px] px-2 py-0.5 rounded uppercase tracking-widest shadow-lg">
                                 DISPONÍVEL AGORA
                             </span>
                         </div>
 
-                        <span class="text-[9px] md:text-[10px] font-retro tracking-widest text-cyan-400 mb-3 block animate-bounce uppercase">
+                        <span class="text-[8px] md:text-[9px] font-retro tracking-widest text-cyan-400 mb-2.5 block animate-bounce uppercase">
                             ATUALIZAÇÃO CONCLUÍDA
                         </span>
                         
-                        <h2 class="text-2xl md:text-4xl font-black font-orbitron text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 via-white to-purple-400 glow-text-azure mb-3 uppercase">
+                        <h2 class="text-xl md:text-3xl font-black font-orbitron text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 via-white to-[#5d59f3] glow-text-azure mb-2 uppercase">
                             The Azure Has Been Arrived
                         </h2>
                         
-                        <p class="text-xs md:text-sm text-gray-300 tracking-wider max-w-md mx-auto mb-6">
+                        <p class="text-xs text-gray-300 tracking-wider max-w-md mx-auto mb-5">
                             O futuro chegou. Conecte-se aos servidores e encare novos desafios cósmicos.
                         </p>
 
                         <!-- Botão Jogue Agora linkado ao Roblox -->
                         <a href="https://www.roblox.com/share?code=77d12fccae9ee64fa427be5caf7518ae&type=ExperienceDetails&stamp=1782440822074" 
                            target="_blank" 
-                           class="btn-cinematic px-8 py-4 rounded-xl font-retro text-xs md:text-sm tracking-widest flex items-center space-x-3 text-white shadow-lg uppercase">
-                            <i class="fa-solid fa-gamepad text-base animate-pulse"></i>
+                           class="btn-cinematic px-7 py-3.5 rounded-xl font-retro text-[9px] md:text-[10px] tracking-widest flex items-center space-x-3 text-white shadow-lg uppercase">
+                            <i class="fa-solid fa-gamepad text-sm animate-pulse"></i>
                             <span>JOGUE AGORA!</span>
                         </a>
                     </div>
@@ -435,7 +440,7 @@
         </section>
 
         <!-- PLAYER DE TRILHA SONORA CINEMATOGRÁFICA (Visual Deltarune retrô integrado) -->
-        <section id="playlist-section" class="w-full max-w-xl glass-panel border border-cyan-500/20 rounded-xl p-4 mt-8 z-20">
+        <section id="playlist-section" class="w-full glass-panel border border-cyan-500/20 rounded-xl p-4 mt-8 z-20">
             <div class="flex items-center justify-between border-b border-white/10 pb-2 mb-3">
                 <span class="text-[8px] font-retro text-cyan-400 tracking-wider">
                     <i class="fa-solid fa-music mr-1 animate-pulse"></i> SELETOR DE TRILHA SONORA
@@ -491,7 +496,7 @@
     <footer class="w-full max-w-4xl px-4 pt-8 z-20 flex flex-col md:flex-row justify-between items-center text-[10px] text-gray-500 gap-4 text-center">
         <span>&copy; 2026 The Azure Project. Todos os direitos reservados.</span>
         <div class="flex items-center space-x-4">
-            <!-- Link do Evento no Footer -->
+            <!-- Link do Evento no Roblox -->
             <a href="https://www.roblox.com/share?code=77d12fccae9ee64fa427be5caf7518ae&type=ExperienceDetails&stamp=1782440822074" target="_blank" class="hover:text-cyan-400 transition">Ver Evento no Roblox</a>
         </div>
     </footer>
@@ -503,7 +508,7 @@
     </div>
 
     <script>
-        // Configurações e Músicas Fornecidas (Atualizada com as 3 novas faixas)
+        // Configurações e Músicas Fornecidas
         const tracks = [
             { name: "1. Azure Ambient", url: "https://files.catbox.moe/qi3fat.m4a" },
             { name: "2. Space Odyssey", url: "https://files.catbox.moe/pag061.mp3" },
@@ -542,7 +547,7 @@
             preloadAllTracks();
         }
 
-        // Pré-carregamento auxiliar em segundo plano (cache nativo do navegador)
+        // Pré-carregamento de cache para o navegador
         function preloadAllTracks() {
             tracks.forEach(track => {
                 const audioLink = document.createElement('link');
@@ -688,10 +693,8 @@
             const stateCountdown = document.getElementById('stateCountdown');
             const stateComingSoon = document.getElementById('stateComingSoon');
             const stateFinished = document.getElementById('stateFinished');
-            const mainCard = document.getElementById('mainDisplayCard');
             const cornerStains = document.getElementById('cornerStains');
 
-            mainCard.classList.remove('glow-purple', 'glow-azure');
             stateCountdown.classList.remove('timer-fade-out');
             stateFinished.classList.remove('update-bounce-jump');
             cornerStains.classList.remove('active');
@@ -704,7 +707,6 @@
                 stateCountdown.classList.add('hidden');
                 stateFinished.classList.add('hidden');
                 stateComingSoon.classList.remove('hidden');
-                mainCard.classList.add('glow-purple');
                 document.getElementById('comingSoonYear').innerText = year;
             }
             // REGRA 2: Chegou a zero ou passou do tempo -> Lançamento Direto
@@ -713,7 +715,6 @@
                 stateComingSoon.classList.add('hidden');
                 stateFinished.classList.remove('hidden');
                 stateFinished.classList.add('update-bounce-jump');
-                mainCard.classList.add('glow-azure');
                 cornerStains.classList.add('active');
                 hasReachedZeroTriggered = true;
             }
@@ -723,10 +724,9 @@
                 stateComingSoon.classList.add('hidden');
                 stateFinished.classList.add('hidden');
                 stateCountdown.classList.remove('hidden');
-                mainCard.classList.add('glow-azure');
 
                 const options = { year: 'numeric', month: 'long', day: 'numeric', hour: '2-digit', minute: '2-digit' };
-                document.getElementById('targetDateDisplay').innerText = targetDate.toLocaleDateString('pt-BR', options);
+                document.getElementById('targetDateDisplay').innerText = targetDate.toLocaleDateString('pt-BR', options).replace(' às ', ' · ');
 
                 isClimaxTrackTriggered = false;
                 runClockUpdate();
@@ -757,11 +757,6 @@
                         const stateFinished = document.getElementById('stateFinished');
                         stateFinished.classList.remove('hidden');
                         stateFinished.classList.add('update-bounce-jump');
-                        
-                        const mainCard = document.getElementById('mainDisplayCard');
-                        mainCard.classList.remove('glow-purple');
-                        mainCard.classList.add('glow-azure');
-                        
                         showToast("ATUALIZAÇÃO LANÇADA!");
                     }, 1000);
                 }
@@ -827,11 +822,11 @@
             reset() {
                 this.x = Math.random() * canvas.width;
                 this.y = canvas.height + 10;
-                this.size = Math.random() * 1.8 + 0.6;
-                this.speedY = -(Math.random() * 0.5 + 0.1);
-                this.speedX = (Math.random() - 0.5) * 0.2;
-                this.alpha = Math.random() * 0.4 + 0.1;
-                this.color = Math.random() > 0.5 ? 'rgba(0, 210, 255, ' : 'rgba(122, 0, 255, ';
+                this.size = Math.random() * 1.5 + 0.5;
+                this.speedY = -(Math.random() * 0.4 + 0.1);
+                this.speedX = (Math.random() - 0.5) * 0.15;
+                this.alpha = Math.random() * 0.3 + 0.1;
+                this.color = Math.random() > 0.5 ? 'rgba(0, 210, 255, ' : 'rgba(93, 89, 243, ';
             }
 
             update() {
@@ -852,7 +847,7 @@
 
         function initParticles() {
             particles = [];
-            const count = Math.min(Math.floor(window.innerWidth / 20), 80);
+            const count = Math.min(Math.floor(window.innerWidth / 22), 60);
             for (let i = 0; i < count; i++) {
                 particles.push(new CosmicParticle());
             }
@@ -879,4 +874,5 @@
     </script>
 </body>
 </html>
+
 
